@@ -2,10 +2,20 @@ namespace VendingMachinev1;
 
 public class Account
 {
-    public int Total { get; set; }
-    
-    public Account( int total)
+    private int _balance;
+    private string _accountnr;
+
+    public Account( int balance, string accountnr)
     {
-        Total = total;
+        _balance = balance;
+        _accountnr = accountnr;
+    }
+
+    public void CheckBalance()
+    {
+    }
+
+    public void DeductFromBalance()
+    {
     }
 }
