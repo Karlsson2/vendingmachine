@@ -11,11 +11,21 @@ public class Account
         _accountnr = accountnr;
     }
 
-    public void CheckBalance()
+    public int CheckBalance()
     {
+        return _balance;
     }
 
-    public void DeductFromBalance()
+    public bool DeductFromBalance(int cost)
     {
+        if (CheckBalance() >= cost)
+        {
+            _balance -= cost;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

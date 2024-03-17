@@ -8,4 +8,9 @@ public class Bank
     {
         Accounts = new List<Account>(); 
     }
+
+    public bool DoesAccountExist(Account account)
+    {
+        return Accounts.Any(acc => acc.Equals(account));
+    }
 }
