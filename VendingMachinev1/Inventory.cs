@@ -13,9 +13,12 @@ public class Inventory
     {
         UserProducts.Add(product);
     }
-    public void RemoveFromInventory(Product product)
+    public void RemoveFromInventory(int index)
     {
-        UserProducts.Remove(product);
+        if (index >= 0 && index < UserProducts.Count)
+        {
+            UserProducts.RemoveAt(index);
+        }
     }
 
     public int GetTotalofInventory()
@@ -30,10 +33,17 @@ public class Inventory
 
     public void DisplayInventory()
     {
+        var counter = 1;
         foreach (var product in UserProducts)
         {
-            Console.WriteLine(product.Name);
+            Console.WriteLine($"{counter}. {product.Name}");
+            counter++;
         }
+    }
+
+    public void EmptyInventory()
+    {
+      UserProducts.Clear();  
     }
 
 }

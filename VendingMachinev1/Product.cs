@@ -12,10 +12,5 @@ public class Product
         Price = price;
         Quantity = quantity;
     }
-
-    public void ReduceQuantity(int total)
-    {
-        Quantity = Quantity - total;
-    }
     
 }
