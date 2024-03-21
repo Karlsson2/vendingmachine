@@ -3,13 +3,13 @@
 using VendingMachinev1;
 
 
+//create all the initial values
+var bank = new Bank();
+var account = new Account(100, "abcdef4");
+bank.Accounts.Add(account);
+var inventory = new Inventory();
+var user = new User( "John Does", account, inventory);
 
-var Bank = new Bank();
-var Account = new Account(100, "abcdef4");
-Bank.Accounts.Add(Account);
-var Inventory = new Inventory();
-var User = new User( "John Does", Account, Inventory);
+var vendingMachine = new VendingMachine(user);
 
-var VendingMachine = new VendingMachine(User);
-
-VendingMachine.Run();
+vendingMachine.Run();

@@ -1,5 +1,5 @@
 namespace VendingMachinev1;
-
+//this class ended up being kinda useless, didnt need the "authentication" of wheather an account existed or not
 public class Bank
 {
     public List<Account> Accounts { get; }

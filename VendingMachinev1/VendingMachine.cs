@@ -31,6 +31,7 @@ public class VendingMachine
         Products.Add(new Product("CUTE KITTY :3", 5, 8));
     }
 
+    //render the pretty header
     public void RenderHeader()
     {
         Console.BackgroundColor = ConsoleColor.Black;
@@ -41,6 +42,7 @@ public class VendingMachine
         Console.ResetColor(); 
     }
 
+    //run the vendingmachine 
     public void Run()
     {
         //code to run the vending machine.
@@ -58,32 +60,9 @@ public class VendingMachine
                 else if (command == 2)
                 {
                     Console.Clear(); 
-                    RenderHeader();
-                    DisplayUserInventory();
-                    Console.WriteLine("Press 1 to edit Inventory or Enter to return to the main menu...");
-                    var userInput = Console.ReadLine();
-                    if (userInput == "1")
-                    {
-                        var running = true;
-                        while (running){
-                            Console.Clear(); 
-                            RenderHeader();
-                            DisplayUserInventory();
-                            Console.WriteLine(
-                                "Enter the number of the product you wish to Remove or Enter to go back");
-                            var productIndex = Console.ReadLine();
-                            if (productIndex == "")
-                            {
-                                break;
-                            }
-                            var index = int.Parse(productIndex);
-                            CurrentUser.Inventory.RemoveFromInventory(index-1);
-                            
-                        }
-    
-                        
-                    }
+                    ShowUserInventory();
                 }
+                //checkout
                 else if (command == 3)
                 {
                     Console.Clear(); 
@@ -92,14 +71,37 @@ public class VendingMachine
                 }
         } while (command != 4);
     }
+
+    public void ShowUserInventory()
+    {
+        RenderHeader();
+        DisplayUserInventory();
+        Console.WriteLine("Press 1 to edit Inventory or Enter to return to the main menu...");
+        var userInput = Console.ReadLine();
+        if (userInput == "1")
+        {
+            while (true){
+                Console.Clear(); 
+                RenderHeader();
+                DisplayUserInventory();
+                Console.WriteLine(
+                    "Enter the number of the product you wish to Remove or Enter to go back");
+                var productIndex = Console.ReadLine();
+                if (productIndex == "")
+                {
+                    break;
+                }
+                var index = int.Parse(productIndex);
+                CurrentUser.Inventory.RemoveFromInventory(index-1);
+                            
+            }
+        }
+    }
+
     public void DisplayUserInventory()
     {
         Console.WriteLine($"{CurrentUser.Name}'s Inventory" );
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++");
-        Console.ResetColor(); 
-
+        RenderLine();
         if (CurrentUser.Inventory.UserProducts.Count <= 0)
         {
             Console.WriteLine("Inventory is empty, go back and add some items");
@@ -107,13 +109,18 @@ public class VendingMachine
         else
         {
             CurrentUser.Inventory.DisplayInventory();
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++");
-            Console.ResetColor(); 
+            RenderLine();
             Console.WriteLine($"Total Cost: {CurrentUser.Inventory.GetTotalofInventory()}");
             
         }
+    }
+
+    public void RenderLine()
+    {
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++");
+        Console.ResetColor(); 
     }
 
     public int GetCommand(List<string> commands)

@@ -9,10 +9,12 @@ public class Inventory
         UserProducts = new List<Product>(); 
     }
 
+    //add products to the inventory list
     public void AddToInventory(Product product)
     {
         UserProducts.Add(product);
     }
+    //remove products from the inventory list
     public void RemoveFromInventory(int index)
     {
         if (index >= 0 && index < UserProducts.Count)
@@ -20,17 +22,18 @@ public class Inventory
             UserProducts.RemoveAt(index);
         }
     }
-
+    //caluclate the total price of the inventory list
     public int GetTotalofInventory()
     {
         var total = 0;
-        foreach (var Product in UserProducts)
+        foreach (var product in UserProducts)
         {
-            total += Product.Price;
+            total += product.Price;
         }
         return total;
     }
 
+    //show all the products in the inventory
     public void DisplayInventory()
     {
         var counter = 1;
@@ -40,7 +43,7 @@ public class Inventory
             counter++;
         }
     }
-
+    //clear the inventory of products
     public void EmptyInventory()
     {
       UserProducts.Clear();  
