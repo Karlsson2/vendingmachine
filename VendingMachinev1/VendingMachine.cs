@@ -175,28 +175,31 @@ public class VendingMachine
     public void Checkout()
     {
         DisplayUserInventory();
-        Console.WriteLine("Would you like to check out? (yes/no)");
-        var input = Console.ReadLine();
         var balance = CurrentUser.Account.CheckBalance();
         var total = CurrentUser.Inventory.GetTotalofInventory();
-        if (input.ToLower() == "yes" && balance >= total)
+        if ( balance >= total && CurrentUser.Inventory.CountInventory() > 0)
         {
-            Console.WriteLine($"Your balance is: {balance}");
-            Console.WriteLine($"The total is: {total}");
-            Console.WriteLine($"You will have {balance - total} left in your account, proceed? (yes/no)");
-            var confirmationInput = Console.ReadLine();
-            if (confirmationInput.ToLower() == "yes")
-            {
-                CurrentUser.Account.DeductFromBalance(total);
-                CurrentUser.Inventory.EmptyInventory();
-                Console.WriteLine("Completed!");
-                Console.WriteLine("Press Enter to return");
-                Console.ReadLine();
+            Console.WriteLine("Would you like to check out? (yes/no)");
+            var input = Console.ReadLine();
+            if (input.ToLower() == "yes"){
+                Console.WriteLine($"Your balance is: {balance}");
+                Console.WriteLine($"The total is: {total}");
+                Console.WriteLine($"You will have {balance - total} left in your account, proceed? (yes/no)");
+                var confirmationInput = Console.ReadLine();
+                if (confirmationInput.ToLower() == "yes")
+                {
+                    CurrentUser.Account.DeductFromBalance(total);
+                    CurrentUser.Inventory.EmptyInventory();
+                    Console.WriteLine("Completed!");
+                    Console.WriteLine("Press Enter to return");
+                    Console.ReadLine();
+                }
             }
         }
         else
         {
-            Console.WriteLine("Sorry you don't have enough for that purchase!");
+            //to do: would have been nice to have a way to display a different error message....
+            Console.WriteLine("Sorry you don't have enough for that purchase or your inventory is empty!");
             Console.WriteLine("Press Enter to return");
             Console.ReadLine();
         }

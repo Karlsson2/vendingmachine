@@ -33,6 +33,11 @@ public class Inventory
         return total;
     }
 
+    public int CountInventory()
+    {
+        return UserProducts.Count;
+    }
+
     //show all the products in the inventory
     public void DisplayInventory()
     {
